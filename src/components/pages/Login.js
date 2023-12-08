@@ -1,18 +1,20 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import styles from "./Login.module.css";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import styles from "./SignUp.module.css";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { authActions } from "../../store/auth-reducer";
 
 function Login() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
-  //   const dispatch = useDispatch();
+  // useDispatch
+  const dispatch = useDispatch();
 
   const emailHandler = (e) => {
     setEmail(e.target.value);
@@ -21,7 +23,6 @@ function Login() {
     setPassword(e.target.value);
   };
   const submitHandler = async (e) => {
-    console.log("kk");
     e.preventDefault();
     let user = {
       email: email,
@@ -43,11 +44,7 @@ function Login() {
         setEmail("");
         setPassword("");
         let data = await response.json();
-        console.log(data);
-        console.log(data.email);
-        console.log(data.idToken);
-        // dispatch(authActions.login(data.idToken));
-        // authCtx.login(data.idToken);
+        dispatch(authActions.login(data.idToken));
         navigate("/", { replace: true });
       } else {
         response.json().then((data) => {
@@ -97,8 +94,7 @@ function Login() {
           </Form>
           <br />
           <p>
-            Doesn't have an account?{" "}
-            <Link to="/registration">Register here </Link>
+            Doesn't have an account? <Link to="/signup">Register here </Link>
           </p>
         </Col>
       </Row>

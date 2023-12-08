@@ -1,0 +1,35 @@
+.compose_container {
+  margin: 2rem 10%;
+}
+
+.input {
+  display: flex;
+  justify-content: space-between;
+  margin: 1rem 0.2rem;
+}
+
+.input input {
+  width: 40%;
+  border: 2px solid rgb(4, 177, 245);
+  border-radius: 5px;
+}
+
+.wrapper-class {
+  border: 2px solid rgb(204, 200, 200);
+  border-radius: 10px;
+  height: 320px;
+}
+
+.editor-class {
+  border: 1px solid rgb(230, 228, 228);
+  border-radius: 5px;
+  background-color: #ffffff;
+  margin: 2px;
+  height: 265px;
+}
+
+.toolbar-class {
+  border: 2px solid rgb(169, 166, 166);
+  margin: 3px;
+  border-radius: 5px;
+}

@@ -5,7 +5,7 @@ import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import styles from "./SignUp.module.css";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function SignUp() {
   const [email, setEmail] = useState("");
@@ -28,7 +28,6 @@ function SignUp() {
     setConfirmPswd(e.target.value);
   };
   const submitHandler = async (e) => {
-    console.log("kk");
     e.preventDefault();
     if (email.includes("@") === false) {
       setEmailValidate(true);
@@ -129,7 +128,9 @@ function SignUp() {
             </Button>
           </Form>
 
-          <p>{/* Have an account? <Link to="/login">Login here </Link> */}</p>
+          <p>
+            Have an account? <Link to="/login">Login here </Link>
+          </p>
         </Col>
       </Row>
     </Container>
