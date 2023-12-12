@@ -39,7 +39,7 @@ function Compose() {
       sender: sendersEmail,
       subject: subject,
       message: message,
-      read: false,
+      read: true,
       time: {
         year: currentDate.getFullYear(),
         month: currentDate.getMonth() + 1,
@@ -48,13 +48,20 @@ function Compose() {
         minutes: currentDate.getMinutes(),
       },
     };
+
+    let recievemail = {
+      ...sendmail,
+      read: false,
+    };
+    console.log(sendmail);
+    console.log(recievemail);
     setRecieverEmail("");
     setSubject("");
     setEditorState(EditorState.createEmpty());
     // setMessage("");
     // let ind = recieverEmail.indexOf("@");
     // let reciever = recieverEmail.slice(0, ind);
-    dispatch(mailAction.recieveMessage(sendmail));
+    dispatch(mailAction.recieveMessage(recievemail));
     dispatch(mailAction.sentMessage(sendmail));
   };
 

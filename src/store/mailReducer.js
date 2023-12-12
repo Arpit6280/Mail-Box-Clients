@@ -7,6 +7,7 @@ const initialMailState = {
   reciever: "",
   allSentMails: [],
   allRecievedMails: [],
+  request: "",
   unread: 0,
 };
 let iniEmail = localStorage.getItem("email");
@@ -36,6 +37,12 @@ const mailSlice = createSlice({
     },
     readMessage(state, action) {
       if (state.unread > 0) state.unread = Number(state.unread) - 1;
+    },
+    sendRequest(state, action) {
+      state.request = "send";
+    },
+    recieveRequest(state, action) {
+      state.request = "recieve";
     },
     // },
   },
