@@ -44,8 +44,11 @@ function Login() {
         setEmail("");
         setPassword("");
         let data = await response.json();
-        dispatch(authActions.login(data.idToken));
-        navigate("/", { replace: true });
+        console.log(data);
+        let idToken = data.idToken;
+        let email = data.email;
+        dispatch(authActions.login({ idToken, email }));
+        navigate("/inbox", { replace: true });
       } else {
         response.json().then((data) => {
           //show an error modal
@@ -53,12 +56,13 @@ function Login() {
         });
       }
     } catch (e) {
+      console.log(e);
       alert("Error while Login", e);
     }
   };
   return (
     <Container>
-      <Row className="mt-5">
+      <Row className="pt-5">
         <Col sm={6}>
           <img
             className={styles.img}

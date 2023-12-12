@@ -72,7 +72,7 @@ function SignUp() {
   };
   return (
     <Container>
-      <Row className="mt-5">
+      <Row className="pt-5">
         <Col sm={6}>
           <img
             className={styles.img}

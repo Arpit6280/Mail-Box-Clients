@@ -1,0 +1,14 @@
+.sidebar_container {
+  background-color: rgb(243 244 246);
+}
+
+.logo {
+  margin-bottom: 2.5rem;
+}
+
+.active {
+  background-color: rgb(73, 134, 234);
+  width: 95%;
+  border-radius: 5px;
+  color: #fff !important;
+}
