@@ -30,8 +30,15 @@ function App() {
   console.log(email);
 
   useEffect(() => {
-    dispatch(fetchInboxmails(email, "send"));
-    dispatch(fetchInboxmails(email, "recieve"));
+    let intervalId = setInterval(() => {
+      // dispatch(mailAction.setUnreadMessageToZero());
+      dispatch(fetchInboxmails(email, "send"));
+      dispatch(fetchInboxmails(email, "recieve"));
+    }, [2000]);
+
+    return () => {
+      clearInterval(intervalId);
+    };
   }, [dispatch, email]);
   useEffect(() => {
     dispatch(sendMailData(smail, sender, reciever));

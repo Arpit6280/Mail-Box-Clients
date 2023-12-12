@@ -32,6 +32,9 @@ const mailSlice = createSlice({
     allRecievedMails(state, action) {
       state.allRecievedMails = action.payload;
     },
+    setUnreadMessageToZero(state, action) {
+      state.unread = 0;
+    },
     unReadMessage(state, action) {
       state.unread = Number(state.unread) + 1;
     },
@@ -107,14 +110,14 @@ export const recieveMailData = (mail, reciever) => {
 export const fetchInboxmails = (sender, str) => {
   return async (dispatch) => {
     const fetchMails = async () => {
-      console.log(sender);
+      // console.log(sender);
       let ind = sender.indexOf("@");
       if (ind !== -1) {
         sender = sender.slice(0, ind);
       }
-      console.log(ind);
+      // console.log(ind);
 
-      console.log(sender);
+      // console.log(sender);
       const response = await fetch(
         `https://react-http-62209-default-rtdb.firebaseio.com/emails/${sender}/${str}.json`
       );
@@ -122,14 +125,17 @@ export const fetchInboxmails = (sender, str) => {
         throw new Error("Could not fetch Data ");
       }
       const data = await response.json();
-      console.log(data);
+      // console.log(data);
       let mails = [];
       if (data !== null) {
+        console.log("hhh");
+        if (str === "recieve") dispatch(mailAction.setUnreadMessageToZero());
         let ar = Object.keys(data);
         for (const key in data) {
           // for unread message start
           if (str === "recieve") {
             if (data[key].read === false) {
+              console.log("kkk");
               dispatch(mailAction.unReadMessage());
             } else {
               dispatch(mailAction.readMessage());
@@ -149,14 +155,14 @@ export const fetchInboxmails = (sender, str) => {
           };
           mails.push(mail);
         }
-        console.log(ar);
+        // console.log(ar);
       }
 
       return mails;
     };
     try {
       const mailData = await fetchMails();
-      console.log(mailData);
+      // console.log(mailData);
       if (str === "send") dispatch(mailAction.allSentMails(mailData));
       else dispatch(mailAction.allRecievedMails(mailData));
     } catch (e) {
