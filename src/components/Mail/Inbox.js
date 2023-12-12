@@ -13,8 +13,11 @@ function Inbox() {
       {mails.length > 0
         ? mails.map((item) => (
             <InboxMessages
+              key={item.id}
+              id={item.id}
               sender={item.reciever}
               subject={item.subject}
+              read={item.read}
               time={item.time}
             />
           ))

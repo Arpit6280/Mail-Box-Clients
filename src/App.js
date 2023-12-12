@@ -17,6 +17,7 @@ import Inbox from "./components/Mail/Inbox";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Sent from "./components/Mail/Sent";
+import ReadMessage from "./components/Mail/ReadMessage";
 
 function App() {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
@@ -63,6 +64,7 @@ function App() {
                 <Route path="/inbox" element={<Inbox />} />
                 <Route path="/compose" element={<Compose />} />
                 <Route path="/sent" element={<Sent />} />
+                <Route path="/inbox/:messageId" element={<ReadMessage />} />
               </Routes>
             </Col>
           </Row>

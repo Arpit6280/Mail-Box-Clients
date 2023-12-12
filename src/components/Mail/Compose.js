@@ -39,6 +39,7 @@ function Compose() {
       sender: sendersEmail,
       subject: subject,
       message: message,
+      read: false,
       time: {
         year: currentDate.getFullYear(),
         month: currentDate.getMonth() + 1,

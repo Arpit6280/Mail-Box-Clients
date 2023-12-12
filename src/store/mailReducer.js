@@ -7,6 +7,7 @@ const initialMailState = {
   reciever: "",
   allSentMails: [],
   allRecievedMails: [],
+  unread: 0,
 };
 let iniEmail = localStorage.getItem("email");
 
@@ -29,6 +30,9 @@ const mailSlice = createSlice({
     },
     allRecievedMails(state, action) {
       state.allRecievedMails = action.payload;
+    },
+    readMessage(state, action) {
+      state.unread = Number(state.unread) + 1;
     },
     // },
   },
@@ -112,15 +116,20 @@ export const fetchInboxmails = (sender, str) => {
       let mails = [];
       if (data !== null) {
         let ar = Object.keys(data);
-
-        for (let i = 0; i < ar.length; ++i) {
-          console.log(data[ar[i]].time);
+        for (const key in data) {
+          console.log(data[key].time);
+          console.log(key);
+          if (data[key].read === false) {
+            dispatch(mailAction.readMessage());
+          }
           let mail = {
-            sender: data[ar[i]].sender,
-            message: data[ar[i]].message,
-            reciever: data[ar[i]].reciever,
-            subject: data[ar[i]].subject,
-            time: data[ar[i]].time,
+            id: key,
+            sender: data[key].sender,
+            message: data[key].message,
+            reciever: data[key].reciever,
+            subject: data[key].subject,
+            read: data[key].read,
+            time: data[key].time,
           };
           mails.push(mail);
         }
