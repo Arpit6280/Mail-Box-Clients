@@ -15,7 +15,7 @@ function Inbox() {
             <InboxMessages
               key={item.id}
               id={item.id}
-              sender={item.reciever}
+              sender={item.sender}
               subject={item.subject}
               read={item.read}
               time={item.time}

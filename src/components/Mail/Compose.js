@@ -51,7 +51,7 @@ function Compose() {
     setRecieverEmail("");
     setSubject("");
     setEditorState(EditorState.createEmpty());
-    setMessage("");
+    // setMessage("");
     // let ind = recieverEmail.indexOf("@");
     // let reciever = recieverEmail.slice(0, ind);
     dispatch(mailAction.recieveMessage(sendmail));

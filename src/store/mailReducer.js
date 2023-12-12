@@ -31,8 +31,11 @@ const mailSlice = createSlice({
     allRecievedMails(state, action) {
       state.allRecievedMails = action.payload;
     },
-    readMessage(state, action) {
+    unReadMessage(state, action) {
       state.unread = Number(state.unread) + 1;
+    },
+    readMessage(state, action) {
+      if (state.unread > 0) state.unread = Number(state.unread) - 1;
     },
     // },
   },
@@ -117,11 +120,17 @@ export const fetchInboxmails = (sender, str) => {
       if (data !== null) {
         let ar = Object.keys(data);
         for (const key in data) {
-          console.log(data[key].time);
-          console.log(key);
-          if (data[key].read === false) {
-            dispatch(mailAction.readMessage());
+          // for unread message start
+          if (str === "recieve") {
+            if (data[key].read === false) {
+              dispatch(mailAction.unReadMessage());
+            } else {
+              dispatch(mailAction.readMessage());
+            }
           }
+
+          // end
+
           let mail = {
             id: key,
             sender: data[key].sender,
